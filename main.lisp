@@ -150,7 +150,7 @@
                                  :data data)))))))
 
 (defmethod fetch-resource-owner-details ((provider provider) token)
-  (fetch-resource provider (povider-resource-owner-url povider)))
+  (fetch-resource provider (provider-resource-owner-url provider)))
 
 (defun token-expired-p (token)
   (when (token-expires-in token)
