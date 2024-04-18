@@ -21,7 +21,7 @@
            :reader facebook-provider-fields
            :documentation "The fields to look up when requesting the resource owner"))
   (:default-initargs
-   :default-scope '("public_profile" "email")
+   :scope '("public_profile" "email")
    :fields '("id" "name" "first_name" "last_name"
              "email" "hometown" "picture.type(large){url,is_silhouette}"
              "gender" "age_range")))

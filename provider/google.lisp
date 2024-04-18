@@ -25,7 +25,7 @@
    :authorize-url "https://accounts.google.com/o/oauth2/v2/auth"
    :access-token-url "https://oauth2.googleapis.com/token"
    :resource-owner-url "https://openidconnect.googleapis.com/v1/userinfo"
-   :default-scope '("openid" "email" "profile")
+   :scope '("openid" "email" "profile")
    :scope-separator " "))
 
 

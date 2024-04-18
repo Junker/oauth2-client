@@ -58,10 +58,10 @@
    (resource-owner-url :initarg :resource-owner-url
                        :accessor provider-resource-owner-url
                        :type string)
-   (default-scope :initarg :default-scope
-                  :accessor provider-default-scope
-                  :initform nil
-                  :type list)
+   (scope :initarg :scope
+          :accessor provider-scope
+          :initform nil
+          :type list)
    (scope-separator :initarg :scope-separator
                     :accessor provider-scope-separator
                     :initform ","
@@ -104,16 +104,16 @@
 
 (defgeneric authorization-params (provider &rest params))
 
-(defmethod authorization-url ((provider provider) &key state scope response-type options)
+(defmethod authorization-url ((provider provider) &key state custom-scope response-type options)
   "Builds the authorization URL"
-  (with-slots (client-id authorize-url default-scope redirect-uri scope-separator) provider
+  (with-slots (client-id authorize-url scope redirect-uri scope-separator) provider
     (add-query-params authorize-url
                       (append `(("client_id" . ,client-id)
                                 ("response_type" . ,(or response-type "code"))
                                 ("state" . ,(or state (generate-state provider)))
                                 ("scope" . ,(reduce (lambda (all s)
                                                       (strcat all scope-separator s))
-                                                    (or scope default-scope)))
+                                                    (or custom-scope scope)))
                                 ("redirect_uri" . ,redirect-uri))
                               (authorization-params provider)
                               options))))
